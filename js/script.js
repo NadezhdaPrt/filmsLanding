@@ -33,14 +33,15 @@ P.S. Здесь есть несколько вариантов решения з
 const promoAdv = document.querySelectorAll('.promo__adv img'),      
       background = document.querySelector('.promo__bg'),
       genre = background.querySelector('.promo__genre'),
-      listOfFilms = document.querySelector('.promo__interactive-list');
+      listOfFilms = document.querySelector('.promo__interactive-list'),
+      input = document.querySelector('.adding__input'),
+      addButton = document.querySelector('button');
 
 promoAdv.forEach(item => {
     item.remove();
 })
 genre.textContent = 'ДРАМА';
 background.style.backgroundImage = `url('img/bg.jpg')`;
-
 
 const movieDB = {
     movies: [
@@ -51,11 +52,22 @@ const movieDB = {
         "Скотт Пилигрим против..."
     ]
 };
+
+console.log(movieDB.movies)
 let list = movieDB.movies.sort();
 listOfFilms.innerHTML = '';
 list.forEach( (film, i) => {
     listOfFilms.innerHTML += `<li class="promo__interactive-item">${i + 1}. ${film}
     <div class="delete"></div>
 </li>`;
+})
+
+addButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (input.value !== '') {
+    listOfFilms.innerHTML += `<li class="promo__interactive-item">1. ${input.value}
+    <div class="delete"></div>`;    
+    input.value = ''; 
+    }   
 })
 
